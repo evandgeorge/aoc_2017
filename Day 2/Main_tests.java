@@ -16,6 +16,22 @@ class Main_tests {
 		int[][] table = {row1, row2, row3, row4, row5};
 		
 		assertEquals(1278, Main.getChecksum(table));
-		
 	}
+
+  @Test
+  void test_getChecksumWithABrokenTable() {
+    int[] row1 = {5};
+    int[] row2 = {};
+      
+    int[][] table = {row1, row2};
+    
+    assertEquals(5, Main.getChecksum(table));
+  }
+
+  @Test
+  void test_getChecksumWithAnEmptyTable() {
+    int[][] table;
+    assertEquals('something', Main.getChecksum(table));
+    
+  }
 }
