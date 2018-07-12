@@ -1,3 +1,5 @@
+package aoc_2017;
+
 import java.util.Scanner;
 
 public class Main {
