@@ -31,7 +31,7 @@ class Main_tests {
   @Test
   void test_getChecksumWithAnEmptyTable() {
     int[][] table;
-    assertEquals('something', Main.getChecksum(table));
+    assertEquals(0, Main.getChecksum(table));
     
   }
 }
