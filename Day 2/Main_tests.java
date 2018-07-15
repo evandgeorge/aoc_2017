@@ -30,8 +30,7 @@ class Main_tests {
 
   @Test
   void test_getChecksumWithAnEmptyTable() {
-    int[][] table;
+    int[][] table = null;
     assertEquals(0, Main.getChecksum(table));
-    
   }
 }

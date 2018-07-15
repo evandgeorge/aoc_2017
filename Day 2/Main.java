@@ -59,12 +59,22 @@ public class Main {
 		return tableData;
 	}
 	
-	public static int getChecksum(int[][] tableData) {							//initialize checksum to 0
-		int checksum = 0;
+	public static int getChecksum(int[][] tableData) {
+		
+		if(tableData == null)													//if table data is null return 0
+			return 0;
+		
+		int checksum = 0;														//initialize checksum to 0
 
 		for(int row = 0; row < tableData.length; row++) {						//cycle through each row of the 2D integer array to compute checksum
-			int rowMin = tableData[row][0];										//initialize the maximum and minimum values of the current row to the first entry in the row
-			int rowMax = tableData[row][0];
+			if(tableData[row].length == 0)										//skip row if it's empty
+				continue;
+			
+			if(tableData[row].length == 1)										//defaults difference to be the first element if there's only one
+				checksum += tableData[row][0];
+			
+				int rowMin = tableData[row][0];									//initialize the maximum and minimum values of the current row to the first entry in the row
+				int rowMax = tableData[row][0];
 			
 			for(int column = 1; column < tableData[row].length; column++) {		//starting at the second entry in the row, compare each table entry to the current max & min to find the absolute maximum and minimum values of the row
 				if(rowMin > tableData[row][column])
@@ -75,6 +85,7 @@ public class Main {
 			}
 			
 			checksum += rowMax - rowMin;										//add the difference between the row max and min to checksum
+			
 		}
 		
 		return checksum;
