@@ -4,6 +4,11 @@ public class Main {
 	
 	//Advent of Code 2017 Day 3
 	
+	static int RIGHT = 0;
+	static int UP = 1;
+	static int LEFT = 2;
+	static int DOWN = 3;
+	
 	public static void main(String[] args) {
 		
 		int squareNumber;
@@ -32,4 +37,59 @@ public class Main {
 		
 		return number;
 	}
+	
+	public static int[] getCoordsOfSquare(int squareNumber) {
+		int direction = RIGHT;
+		int highestX = 0;
+		int highestY = 0;
+		int lowestX = 0;
+		int lowestY = 0;
+		int x = 0;
+		int y = 0;
+		
+		for(int currentSquare = 1; currentSquare < squareNumber; currentSquare++) {
+			if(direction == RIGHT) {
+				x++;
+				if(x > highestX) {
+					highestX = x;
+					direction = UP;
+				}
+				
+				continue;
+			}
+			
+			if(direction == UP) {
+				y++;
+				if(y > highestY) {
+					highestY = y;
+					direction = LEFT;
+				}
+				
+				continue;
+			}
+			
+			if(direction == LEFT) {
+				x--;
+				if(x < lowestX) {
+					lowestX = x;
+					direction = DOWN;
+				}
+				
+				continue;
+			}
+			
+			if(direction == DOWN) {
+				y--;
+				if(y < lowestY) {
+					lowestY = y;
+					direction = RIGHT;
+				}
+				
+				continue;
+			}
+		}
+		
+		return new int[] {x, y};
+	}
+
 }

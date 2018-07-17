@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 class Main_tests {
@@ -15,5 +17,12 @@ class Main_tests {
 		assertEquals(Main.getSquareNumber(""), -1);
 		assertEquals(Main.getSquareNumber("1 3"), -1);
 	}
-
+	
+	@Test
+	void test_getCoordsOfSquare() {
+		assertEquals(Arrays.equals(Main.getCoordsOfSquare(1), new int[] {0, 0}), true);
+		assertEquals(Arrays.equals(Main.getCoordsOfSquare(5), new int[] {-1, 1}), true);
+		assertEquals(Arrays.equals(Main.getCoordsOfSquare(17), new int[] {-2, 2}), true);
+	}
+	
 }
