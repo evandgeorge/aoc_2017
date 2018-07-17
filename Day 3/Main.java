@@ -4,7 +4,7 @@ public class Main {
 	
 	//Advent of Code 2017 Day 3
 	
-	static int RIGHT = 0;											//direction keys
+	static int RIGHT = 0;	//directional keys
 	static int UP = 1;
 	static int LEFT = 2;
 	static int DOWN = 3;
@@ -15,7 +15,7 @@ public class Main {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		do {														//parse input. If input is bad (unable to parse or less than 1) try again
+		do {								//parse input. If input is bad (unable to parse or less than 1) try again
 			System.out.println("Enter square number");
 			squareNumber = getSquareNumber(scanner.nextLine());
 		} while (squareNumber < 1);
@@ -26,7 +26,7 @@ public class Main {
 		
 	}
 	
-	public static int getSquareNumber(String input) {				//attempt to parse string input. Return -1 if error parsing
+	public static int getSquareNumber(String input) {		//attempt to parse string input. Return -1 if error parsing
 		int number;
 		
 		try {
