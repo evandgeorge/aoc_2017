@@ -25,4 +25,12 @@ class Main_tests {
 		assertEquals(Arrays.equals(Main.getCoordsOfSquare(17), new int[] {-2, 2}), true);
 	}
 	
+	@Test
+	void test_getManhattanDistance() {
+		assertEquals(0, Main.getManhattanDistance(new int[] {0, 0}));
+		assertEquals(3, Main.getManhattanDistance(new int[] {-1, -2}));
+		assertEquals(3, Main.getManhattanDistance(new int[] {1, -2}));
+		assertEquals(3, Main.getManhattanDistance(new int[] {1, -2}));
+		assertEquals(50, Main.getManhattanDistance(new int[] {-20, -30}));
+	}
 }
