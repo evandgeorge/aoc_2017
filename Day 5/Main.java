@@ -56,9 +56,15 @@ public class Main {
 				instBuffer += currentChar;
 		}
 
-		if (!instBuffer.equals(""))	//parse and add last instruction if the buffer isn't empty
+		if (!instBuffer.equals("")) // parse and add last instruction if the buffer isn't empty
 			instructions.add(Integer.parseInt(instBuffer));
 
 		return instructions;
+	}
+
+	public static int getNumberOfJumpsToExit(ArrayList<Integer> instructions) {
+		int jumps = 0;
+
+		return jumps;
 	}
 }
