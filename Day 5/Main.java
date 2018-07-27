@@ -21,13 +21,14 @@ public class Main {
 		try {
 			input = new String(Files.readAllBytes(Paths.get(args[0])));
 		} catch (IOException e) {
-			System.out.println("Error reading instructions file.");
+			System.out.println("Error reading instructions file. Check path");
 			e.printStackTrace();
+			System.exit(-1);
 		}
 
 		// attempt to parse instructions file into integer instructions
 		ArrayList<Integer> instructions = getInstructions(input);
-
+		System.out.println(getNumberOfJumpsToExit(instructions) + " jumps to escape");
 	}
 
 	public static ArrayList<Integer> getInstructions(String input) {
@@ -63,7 +64,16 @@ public class Main {
 	}
 
 	public static int getNumberOfJumpsToExit(ArrayList<Integer> instructions) {
-		int jumps = 0;
+		int jumps = 0; // number of jumps taken
+		int index = 0; // current instruction index
+
+		do {
+			int offset = instructions.get(index); // get offset of current instruction
+			instructions.set(index, instructions.get(index) + 1); // add 1 to current index
+			index += offset; // add offset to index
+			jumps++;
+
+		} while (index < instructions.size());
 
 		return jumps;
 	}
