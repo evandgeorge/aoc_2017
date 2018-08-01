@@ -24,7 +24,7 @@ public class Main {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-
+		
 	}
 
 	public static int[] getBlocksPerBank(String input) {
@@ -88,5 +88,11 @@ public class Main {
 		} while (banksToDistribute > 0);
 
 		return blockCounts;
+	}
+	
+	public static int getNumberOfCyclesUntilRepeat(int[] blockCounts) {
+		int cycles = 0;
+		
+		return cycles;
 	}
 }

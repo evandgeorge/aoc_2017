@@ -18,4 +18,12 @@ class Main_tests {
 
 		assertArrayEquals(expected, Main.getRedistributedBanks(testBanks));
 	}
+	
+	@Test
+	void test_getNumberOfCyclesUntilRepeat() {
+		int[] testBanks = new int[] {0, 2, 7, 0};
+		int expectedCycles = 5;
+		
+		assertEquals(expectedCycles, Main.getNumberOfCyclesUntilRepeat(testBanks));
+	}
 }
