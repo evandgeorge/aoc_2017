@@ -26,7 +26,7 @@ public class Main {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		
+
 	}
 
 	public static int[] getBlocksPerBank(String input) {
@@ -78,46 +78,45 @@ public class Main {
 			currentBank = indexOfHighest + 1;
 
 		do {
-			// add 1 to current bank, subtract 1 from blocksToDistribute, go to the next bank
+			// add 1 to current bank, subtract 1 from blocksToDistribute, go to the next
+			// bank
 			blockCounts[currentBank]++;
 			currentBank++;
 			blocksToDistribute--;
-			
+
 			// if the index is equal to the length of the array, its past the last bank and
 			// needs to go back to the first
 			if (currentBank == blockCounts.length)
 				currentBank = 0;
 
 		} while (blocksToDistribute > 0);
-		
+
 		return blockCounts;
 	}
-	
+
 	public static int getNumberOfCyclesUntilRepeat(int[] blockCounts) {
 		int cycles = 0;
-		
+
 		// make array list to record all distributions of blocks after each redistribution
-		ArrayList<int[]> previousBlockCounts = new ArrayList<int[]>(); 
-		previousBlockCounts.add(blockCounts);
-		
-		while(true) {
+		ArrayList<int[]> previousBlockCounts = new ArrayList<int[]>();
+		previousBlockCounts.add(blockCounts.clone());
+
+		while (true) {
 			blockCounts = getRedistributedBanks(blockCounts);
+			cycles++;
 			
-			if(checkRepeat(previousBlockCounts, blockCounts))
+			if (checkRepeat(previousBlockCounts, blockCounts))
 				return cycles;
-			
-			
-			previousBlockCounts.add(blockCounts);
+
+			previousBlockCounts.add(blockCounts.clone());
 		}
 	}
 
 	private static boolean checkRepeat(ArrayList<int[]> previousBlockCounts, int[] blockCounts) {
-		for(int i = 0; i < previousBlockCounts.size(); i++)
-			if(Arrays.equals(previousBlockCounts.get(i), blockCounts))
+		for (int i = 0; i < previousBlockCounts.size(); i++)
+			if (Arrays.equals(previousBlockCounts.get(i), blockCounts))
 				return true;
-		
-		
-		
+
 		return false;
 	}
 }
