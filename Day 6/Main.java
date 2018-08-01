@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
@@ -63,36 +65,59 @@ public class Main {
 				indexOfHighest = i;
 
 		// store amount of banks in banksToDistribute and clear the blocks from the bank
-		int banksToDistribute = blockCounts[indexOfHighest];
+		int blocksToDistribute = blockCounts[indexOfHighest];
 		blockCounts[indexOfHighest] = 0;
 
 		int currentBank;
 
 		// start with next bank after highest (i + 1), or first (i = 0) if the last bank
 		// was the highest
-		if (indexOfHighest == blockCounts.length)
+		if (indexOfHighest == blockCounts.length - 1)
 			currentBank = 0;
 		else
 			currentBank = indexOfHighest + 1;
 
 		do {
-			// add 1 to current bank, then go to next
+			// add 1 to current bank, subtract 1 from blocksToDistribute, go to the next bank
 			blockCounts[currentBank]++;
 			currentBank++;
-
+			blocksToDistribute--;
+			
 			// if the index is equal to the length of the array, its past the last bank and
 			// needs to go back to the first
 			if (currentBank == blockCounts.length)
 				currentBank = 0;
 
-		} while (banksToDistribute > 0);
-
+		} while (blocksToDistribute > 0);
+		
 		return blockCounts;
 	}
 	
 	public static int getNumberOfCyclesUntilRepeat(int[] blockCounts) {
 		int cycles = 0;
 		
-		return cycles;
+		// make array list to record all distributions of blocks after each redistribution
+		ArrayList<int[]> previousBlockCounts = new ArrayList<int[]>(); 
+		previousBlockCounts.add(blockCounts);
+		
+		while(true) {
+			blockCounts = getRedistributedBanks(blockCounts);
+			
+			if(checkRepeat(previousBlockCounts, blockCounts))
+				return cycles;
+			
+			
+			previousBlockCounts.add(blockCounts);
+		}
+	}
+
+	private static boolean checkRepeat(ArrayList<int[]> previousBlockCounts, int[] blockCounts) {
+		for(int i = 0; i < previousBlockCounts.size(); i++)
+			if(Arrays.equals(previousBlockCounts.get(i), blockCounts))
+				return true;
+		
+		
+		
+		return false;
 	}
 }
