@@ -27,6 +27,12 @@ public class Main {
 			System.exit(-1);
 		}
 
+		int[] blockCounts = getBlocksPerBank(input);
+
+		// output parsed input in case of parsing error
+		System.out.println("Memory Banks: " + Arrays.toString(blockCounts));
+		// output number of cycles until repeated block distribution
+		System.out.println("Repeated block distribution after " + getNumberOfCyclesUntilRepeat(blockCounts) + " cycles");
 	}
 
 	public static int[] getBlocksPerBank(String input) {
@@ -101,18 +107,29 @@ public class Main {
 		ArrayList<int[]> previousBlockCounts = new ArrayList<int[]>();
 		previousBlockCounts.add(blockCounts.clone());
 
-		while (true) {
+		while (cycles < 1000001) {
+			// redistribute blocks and add one to cycles
 			blockCounts = getRedistributedBanks(blockCounts);
 			cycles++;
-			
+
+			// check for a repeat and return cycles if there is
 			if (checkRepeat(previousBlockCounts, blockCounts))
 				return cycles;
 
+			// if there is no repeat add the current blockCounts to the previousBlockCounts list
 			previousBlockCounts.add(blockCounts.clone());
 		}
+
+		// exit after 1000000 cycles in case of infinite loop
+		System.out.println("No repeat found in 1000000 cycles, exiting.");
+		System.exit(-1);
+
+		return cycles;
 	}
 
 	private static boolean checkRepeat(ArrayList<int[]> previousBlockCounts, int[] blockCounts) {
+		// for each previousBlockCount compare it to the current block counts to check for a repeat
+
 		for (int i = 0; i < previousBlockCounts.size(); i++)
 			if (Arrays.equals(previousBlockCounts.get(i), blockCounts))
 				return true;
