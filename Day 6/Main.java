@@ -24,7 +24,7 @@ public class Main {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		
+
 	}
 
 	public static int[] getBlocksPerBank(String input) {
@@ -55,7 +55,38 @@ public class Main {
 	}
 
 	public static int[] getRedistributedBanks(int[] blockCounts) {
-		
+		// find highest bank count
+		int indexOfHighest = 0;
+
+		for (int i = 1; i < blockCounts.length; i++)
+			if (blockCounts[i] > blockCounts[indexOfHighest])
+				indexOfHighest = i;
+
+		// store amount of banks in banksToDistribute and clear the blocks from the bank
+		int banksToDistribute = blockCounts[indexOfHighest];
+		blockCounts[indexOfHighest] = 0;
+
+		int currentBank;
+
+		// start with next bank after highest (i + 1), or first (i = 0) if the last bank
+		// was the highest
+		if (indexOfHighest == blockCounts.length)
+			currentBank = 0;
+		else
+			currentBank = indexOfHighest + 1;
+
+		do {
+			// add 1 to current bank, then go to next
+			blockCounts[currentBank]++;
+			currentBank++;
+
+			// if the index is equal to the length of the array, its past the last bank and
+			// needs to go back to the first
+			if (currentBank == blockCounts.length)
+				currentBank = 0;
+
+		} while (banksToDistribute > 0);
+
 		return blockCounts;
 	}
 }

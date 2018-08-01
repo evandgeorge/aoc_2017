@@ -13,9 +13,9 @@ class Main_tests {
 
 	@Test
 	void test_getRedistributedBanks() {
-		int[] testBanks = new int[] {0, 4, 8, 6, 0, 4, 5};
-		int[] expected = new int[] {1, 5, 1, 8, 1, 5, 6};
-		
+		int[] testBanks = new int[] { 0, 4, 8, 6, 0, 4, 5 };
+		int[] expected = new int[] { 1, 5, 1, 8, 1, 5, 6 };
+
 		assertArrayEquals(expected, Main.getRedistributedBanks(testBanks));
 	}
 }
